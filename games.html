@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GameRev – Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --teal: #08D9D6;
+      --dark: #252A34;
+      --accent: #FF2E63;
+      --light: #EAEAEA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #303847, #252A34 60%, #151821 100%);
+      color: var(--light);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(37, 42, 52, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.06);
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--teal);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      color: #d3d7e0;
+      transition: background 0.18s, transform 0.15s;
+    }
+    .nav-links a:hover {
+      background: rgba(8, 217, 214, 0.12);
+      transform: translateY(-1px);
+    }
+
+    main { padding: 2.7rem 0 3.5rem; }
+    h1 {
+      font-size: clamp(2rem, 3.5vw, 2.4rem);
+      margin-bottom: 0.3rem;
+    }
+    .muted { color: #b0b4c1; font-size: 0.96rem; margin-bottom: 1.4rem; max-width: 620px; }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.3rem;
+      align-items: center;
+    }
+    .filters input {
+      padding: 0.5rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.22);
+      background: rgba(21, 24, 33, 0.9);
+      color: var(--light);
+      min-width: 200px;
+      font-size: 0.9rem;
+    }
+    .filters input:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 1px rgba(8, 217, 214, 0.5);
+    }
+
+    .filter-dropdown {
+      position: relative;
+    }
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fdfdfd;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      box-shadow: 0 10px 22px rgba(255, 46, 99, 0.3);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .filter-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(255, 46, 99, 0.5);
+    }
+    .dropdown-panel {
+      position: absolute;
+      top: 120%;
+      left: 0;
+      background: rgba(21, 24, 33, 0.98);
+      border-radius: 0.7rem;
+      border: 1px solid rgba(234, 234, 234, 0.2);
+      padding: 0.7rem 0.8rem;
+      min-width: 210px;
+      display: none;
+      z-index: 20;
+    }
+    .dropdown-panel.show { display: block; }
+    .dropdown-panel label {
+      font-size: 0.82rem;
+      color: var(--light);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .dropdown-panel select {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.4rem;
+      border: 1px solid rgba(234, 234, 234, 0.2);
+      background: rgba(25, 28, 39, 1);
+      color: var(--light);
+      font-size: 0.85rem;
+    }
+
+    .games-grid {
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(234, 234, 234, 0.12);
+    }
+    .game-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(234, 234, 234, 0.08);
+      transition: background 0.18s, transform 0.12s;
+    }
+    .game-row:hover {
+      background: rgba(37, 42, 52, 0.85);
+      transform: translateY(-1px);
+    }
+
+    .game-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .game-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .game-score {
+      margin-left: auto;
+      font-size: 0.9rem;
+      color: #f9f293;
+      font-weight: 600;
+    }
+    .game-tags {
+      font-size: 0.8rem;
+      color: #a6aec0;
+      margin-bottom: 0.35rem;
+    }
+    .game-snippet {
+      font-size: 0.86rem;
+      color: #e1e3ec;
+    }
+
+    .game-meta {
+      font-size: 0.8rem;
+      color: #b0b4c1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0.28rem;
+      text-align: right;
+    }
+    .chip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.28);
+    }
+
+    footer {
+      border-top: 1px solid rgba(234, 234, 234, 0.06);
+      padding: 1.4rem 0 2.3rem;
+      font-size: 0.8rem;
+      color: #9094a2;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 800px) {
+      .game-row {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+      }
+      .game-meta {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { font-size: 0.83rem; gap: 0.45rem; }
+      h1 { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">GAMEREV</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="submit-review.html">Submit a Review</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Games</h1>
+    <p class="muted">
+      Search by title, then filter by category to see what players who actually main these games are saying.
+    </p>
+
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="Search by game title…" />
+
+      <div class="filter-dropdown">
+        <button type="button" class="filter-btn" id="filterToggle">
+          Filter by category ▾
+        </button>
+        <div class="dropdown-panel" id="filterPanel">
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter">
+            <option value="all">All categories</option>
+            <option value="MOBA">MOBA</option>
+            <option value="Battle Royale">Battle Royale</option>
+            <option value="MMORPG">MMORPG</option>
+            <option value="FPS / Tactical Shooter">FPS / Tactical Shooter</option>
+            <option value="Action RPG">Action RPG</option>
+            <option value="Cozy / Sim">Cozy / Sim</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="games-grid" id="gamesGrid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    © 2050 GameRev. Games and scores here are demo data.
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var games = [
+      {
+        id: "elden-ring",
+        title: "Elden Ring",
+        score: 9.4,
+        category: "Action RPG",
+        platforms: "PC · PS5 · Xbox",
+        tags: "Soulslike · Open World",
+        reviews: 12384,
+        snippet: "“Every death turned into a story I wanted to tell someone about.”"
+      },
+      {
+        id: "valorant",
+        title: "Valorant",
+        score: 8.7,
+        category: "FPS / Tactical Shooter",
+        platforms: "PC",
+        tags: "Tactical · Competitive 5v5",
+        reviews: 21509,
+        snippet: "“Peak ‘one more game’ energy, even when you know you shouldn’t.”"
+      },
+      {
+        id: "stardew",
+        title: "Stardew Valley",
+        score: 9.6,
+        category: "Cozy / Sim",
+        platforms: "PC · Switch · PS · Xbox · Mobile",
+        tags: "Farming Sim · Cozy",
+        reviews: 18032,
+        snippet: "“Somehow manages to be therapy, a hobby, and a second job all at once.”"
+      },
+      {
+        id: "cyberpunk",
+        title: "Cyberpunk 2077 (2.0)",
+        score: 8.9,
+        category: "Action RPG",
+        platforms: "PC · PS5 · Xbox",
+        tags: "RPG · Immersive City",
+        reviews: 9741,
+        snippet: "“Night City finally feels like a place I want to hang out in, not just speedrun.”"
+      },
+      {
+        id: "league",
+        title: "League of Legends",
+        score: 7.9,
+        category: "MOBA",
+        platforms: "PC",
+        tags: "MOBA · Competitive",
+        reviews: 25401,
+        snippet: "“No game has made me uninstall more, or reinstall faster.”"
+      },
+      {
+        id: "fortnite",
+        title: "Fortnite",
+        score: 8.3,
+        category: "Battle Royale",
+        platforms: "PC · Console · Mobile",
+        tags: "Battle Royale · Build / No-Build",
+        reviews: 30102,
+        snippet: "“Somehow always finds a way to be the default hangout spot with friends.”"
+      },
+      {
+        id: "ffxiv",
+        title: "Final Fantasy XIV",
+        score: 9.1,
+        category: "MMORPG",
+        platforms: "PC · PS",
+        tags: "Story · MMO · Raids",
+        reviews: 15670,
+        snippet: "“Came for the free trial meme, stayed for the raids and emotional damage.”"
+      }
+    ];
+
+    var searchInput = document.getElementById("searchInput");
+    var categoryFilter = document.getElementById("categoryFilter");
+    var grid = document.getElementById("gamesGrid");
+
+    function render(list) {
+      grid.innerHTML = "";
+      list.forEach(function (g) {
+        var row = document.createElement("article");
+        row.className = "game-row";
+        row.id = g.id;
+
+        row.innerHTML =
+          '<div>' +
+            '<div class="game-title-row">' +
+              '<span class="game-title">' + g.title + '</span>' +
+              '<span class="game-score">★ ' + g.score.toFixed(1) + '</span>' +
+            '</div>' +
+            '<div class="game-tags">' + g.platforms + '</div>' +
+            '<div class="game-tags">' + g.category + ' · ' + g.tags + '</div>' +
+            '<p class="game-snippet">' + g.snippet + '</p>' +
+          '</div>' +
+          '<div class="game-meta">' +
+            '<span>' + g.reviews.toLocaleString() + ' community reviews</span>' +
+            '<span class="chip-link"><a href="submit-review.html">Add your review →</a></span>' +
+          '</div>';
+
+        grid.appendChild(row);
+      });
+    }
+
+    function applyFilters() {
+      var term = searchInput.value.toLowerCase();
+      var cat = categoryFilter.value;
+
+      var filtered = games.filter(function (g) {
+        var matchesTitle = !term || g.title.toLowerCase().indexOf(term) !== -1;
+        var matchesCat = cat === "all" || g.category === cat;
+        return matchesTitle && matchesCat;
+      });
+
+      render(filtered);
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    categoryFilter.addEventListener("change", applyFilters);
+
+    var filterToggle = document.getElementById("filterToggle");
+    var filterPanel = document.getElementById("filterPanel");
+
+    filterToggle.addEventListener("click", function () {
+      filterPanel.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!filterPanel.contains(e.target) && !filterToggle.contains(e.target)) {
+        filterPanel.classList.remove("show");
+      }
+    });
+
+    applyFilters();
+  })();
+</script>
+</body>
+</html>

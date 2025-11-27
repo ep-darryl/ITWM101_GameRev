@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GameRev – About</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --teal: #08D9D6;
+      --dark: #252A34;
+      --accent: #FF2E63;
+      --light: #EAEAEA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #303847, #252A34 60%, #151821 100%);
+      color: var(--light);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(37, 42, 52, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.06);
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--teal);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      color: #d3d7e0;
+      transition: background 0.18s, transform 0.15s;
+    }
+    .nav-links a:hover {
+      background: rgba(8, 217, 214, 0.12);
+      transform: translateY(-1px);
+    }
+
+    main { padding: 2.7rem 0 3.5rem; }
+    h1 {
+      font-size: clamp(2rem, 3.5vw, 2.4rem);
+      margin-bottom: 0.4rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin: 1.6rem 0 0.4rem;
+    }
+    p {
+      font-size: 0.95rem;
+      color: #c0c4cf;
+      margin-bottom: 0.7rem;
+    }
+
+    .about-line {
+      margin-top: 0.4rem;
+      height: 2px;
+      width: 60px;
+      background: linear-gradient(90deg, var(--teal), var(--accent));
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    ul { margin-left: 1.1rem; margin-top: 0.4rem; color: #b5bac9; font-size: 0.92rem; }
+    li { margin-bottom: 0.35rem; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+    .tag {
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.25);
+      background: rgba(37, 42, 52, 0.9);
+      font-size: 0.78rem;
+      color: #e0e4f0;
+    }
+
+    footer {
+      border-top: 1px solid rgba(234, 234, 234, 0.06);
+      padding: 1.4rem 0 2.3rem;
+      font-size: 0.8rem;
+      color: #9094a2;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 820px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .nav-links { font-size: 0.83rem; gap: 0.45rem; }
+      h1 { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">GAMEREV</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="submit-review.html">Submit a Review</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>About GameRev</h1>
+    <div class="about-line"></div>
+    <p>
+      GameRev grew out of the same late-night voice calls, Discord channels, and “ranked or chill?” chats that most players know too well.
+      Instead of letting those takes disappear after each season, people started turning them into short, searchable reviews.
+    </p>
+
+    <div class="about-grid">
+      <div>
+        <h2>Why people use it</h2>
+        <p>
+          It’s not about professional critics or perfect scores. It’s about how games actually feel when you’ve been in the queue for weeks.
+          GameRev helps you:
+        </p>
+        <ul>
+          <li>Check if a new online game is worth dragging your friends into.</li>
+          <li>See how opinions change after big patches, reworks, or expansions.</li>
+          <li>Find comfort picks for chill nights and sweat picks for full-tryhard sessions.</li>
+          <li>Leave a record of all the metas, broken builds, and cursed seasons you survived.</li>
+        </ul>
+
+        <h2>How reviews work</h2>
+        <p>
+          Every review combines a score with a quick headline and a short write-up. Tags capture the vibe:
+          “cozy queue”, “ranked grind”, “story pain”, or “good with friends only”.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Honest, not formal</span>
+          <span class="tag">Score + vibe tags</span>
+          <span class="tag">Spoiler-aware</span>
+          <span class="tag">Patch-sensitive</span>
+        </div>
+      </div>
+
+      <div>
+        <h2>How the community keeps it readable</h2>
+        <p>
+          To keep the site useful for everyone, regulars tend to follow a few simple habits:
+        </p>
+        <ul>
+          <li>Score based on your experience, not the marketing or fandom wars.</li>
+          <li>Mention your platform, region, and playstyle if it changes how the game feels.</li>
+          <li>Flag spoilers clearly so others can browse safely before finishing the story.</li>
+          <li>Focus on moments and feelings, not just stats and unlocks.</li>
+        </ul>
+
+        <h2>Where to start</h2>
+        <p>
+          If you’re new, start by searching for a game you already know well, then compare your experience with the community.
+          After that, leave a review—it doesn’t have to be long to be helpful.
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    © 2050 GameRev. Built around how people actually play and talk about games.
+  </div>
+</footer>
+</body>
+</html>

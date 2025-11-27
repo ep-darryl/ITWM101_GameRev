@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GameRev – Submit a Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --teal: #08D9D6;
+      --dark: #252A34;
+      --accent: #FF2E63;
+      --light: #EAEAEA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #303847, #252A34 60%, #151821 100%);
+      color: var(--light);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(37, 42, 52, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.06);
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--teal);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      color: #d3d7e0;
+      transition: background 0.18s, transform 0.15s;
+    }
+    .nav-links a:hover {
+      background: rgba(8, 217, 214, 0.12);
+      transform: translateY(-1px);
+    }
+
+    main { padding: 2.7rem 0 3.5rem; }
+    h1 {
+      font-size: clamp(2rem, 3.5vw, 2.4rem);
+      margin-bottom: 0.3rem;
+    }
+    .muted { color: #b0b4c1; font-size: 0.96rem; margin-bottom: 1.4rem; max-width: 520px; }
+
+    .form-shell {
+      border-left: 3px solid var(--teal);
+      padding: 1.4rem 0 0.6rem 1.2rem;
+      margin-top: 0.3rem;
+      background: linear-gradient(90deg, rgba(37, 42, 52, 0.9), rgba(37, 42, 52, 0.7), transparent);
+      animation: fade-up 0.6s ease-out;
+    }
+
+    form { display: grid; gap: 1rem; }
+    label {
+      font-size: 0.85rem;
+      color: var(--light);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 0;
+      border: 1px solid rgba(234, 234, 234, 0.12);
+      background: rgba(21, 24, 33, 0.9);
+      color: var(--light);
+      font-size: 0.9rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 1px rgba(8, 217, 214, 0.5);
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .inline-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .hint {
+      font-size: 0.78rem;
+      color: #a3a7b4;
+      margin-top: 0.2rem;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.86rem;
+      color: #b0b4c1;
+      margin-top: 0.2rem;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: auto;
+      accent-color: var(--accent);
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid transparent;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+      background: var(--accent);
+      color: #fdfdfd;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(255, 46, 99, 0.35);
+      width: 100%;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(255, 46, 99, 0.5);
+    }
+
+    footer {
+      border-top: 1px solid rgba(234, 234, 234, 0.06);
+      padding: 1.4rem 0 2.3rem;
+      font-size: 0.8rem;
+      color: #9094a2;
+      text-align: center;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { font-size: 0.83rem; gap: 0.45rem; }
+      h1 { font-size: 1.9rem; }
+      .form-shell { padding-left: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">GAMEREV</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="submit-review.html">Submit a Review</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Submit a Review</h1>
+    <p class="muted">
+      Lock in your thoughts before the next balance patch. Short, honest, and tagged—that’s all the community needs.
+    </p>
+
+    <div class="form-shell">
+      <form id="reviewForm">
+        <div class="inline-row">
+          <div>
+            <label for="gameTitle">Game title</label>
+            <input id="gameTitle" type="text" placeholder="e.g. Elden Ring" required />
+          </div>
+          <div>
+            <label for="platform">Platform</label>
+            <select id="platform" required>
+              <option value="">Select platform</option>
+              <option>PC</option>
+              <option>PlayStation</option>
+              <option>Xbox</option>
+              <option>Nintendo Switch</option>
+              <option>Mobile</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="inline-row">
+          <div>
+            <label for="score">Score (0–10)</label>
+            <input id="score" type="number" min="0" max="10" step="0.1" placeholder="e.g. 8.5" required />
+            <p class="hint">Score how it felt to play, not just how it looked.</p>
+          </div>
+          <div>
+            <label for="hoursPlayed">Hours played (approx)</label>
+            <input id="hoursPlayed" type="number" min="0" step="1" placeholder="e.g. 40" />
+            <p class="hint">Close enough is good enough.</p>
+          </div>
+        </div>
+
+        <div class="inline-row">
+          <div>
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="">Select category</option>
+              <option>MOBA</option>
+              <option>Battle Royale</option>
+              <option>MMORPG</option>
+              <option>FPS / Tactical Shooter</option>
+              <option>Action RPG</option>
+              <option>Cozy / Sim</option>
+            </select>
+          </div>
+          <div>
+            <label for="tags">Tags (comma-separated)</label>
+            <input id="tags" type="text" placeholder="e.g. cozy, soulslike, co-op, story-heavy" />
+            <p class="hint">Think mood + genre + how you play.</p>
+          </div>
+        </div>
+
+        <div>
+          <label for="headline">Review headline</label>
+          <input id="headline" type="text" placeholder="e.g. ‘I died 200 times and still had fun.’" />
+        </div>
+
+        <div>
+          <label for="reviewText">Full review</label>
+          <textarea id="reviewText" placeholder="What surprised you? What frustrated you? Who would actually enjoy this?"></textarea>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="spoiler" type="checkbox" />
+          <label for="spoiler">This review contains story spoilers.</label>
+        </div>
+
+        <button type="submit" class="btn">Submit review (demo)</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    © 2050 GameRev. Reviews here are demo-only and not stored.
+  </div>
+</footer>
+
+<script>
+  document.getElementById("reviewForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var title = document.getElementById("gameTitle").value;
+    var platform = document.getElementById("platform").value;
+    var score = document.getElementById("score").value;
+    var headline = document.getElementById("headline").value;
+
+    alert(
+      "Demo only – this would submit your review.\n\n" +
+      "Game: " + title +
+      "\nPlatform: " + platform +
+      "\nScore: " + score +
+      (headline ? "\nHeadline: " + headline : "")
+    );
+
+    this.reset();
+  });
+</script>
+</body>
+</html>

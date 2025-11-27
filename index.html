@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GameRev – Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --teal: #08D9D6;
+      --dark: #252A34;
+      --accent: #FF2E63;
+      --light: #EAEAEA;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: radial-gradient(circle at top, #303847, #252A34 50%, #151821 100%);
+      color: var(--light);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(37, 42, 52, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.06);
+      animation: slide-down 0.4s ease-out;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--teal);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      color: #d3d7e0;
+      transition: background 0.18s, transform 0.15s, color 0.18s;
+    }
+    .nav-links a:hover {
+      background: rgba(8, 217, 214, 0.12);
+      color: var(--light);
+      transform: translateY(-1px);
+    }
+
+    main { padding-bottom: 4rem; }
+    section { padding: 3rem 0 1.5rem; }
+
+    h1, h2 { font-weight: 700; }
+
+    /* FEATURED HERO / CAROUSEL */
+    .featured-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 2.9rem);
+      text-align: center;
+      margin-bottom: 0.4rem;
+      animation: fade-up 0.5s ease-out;
+    }
+    .hero-highlight {
+      color: var(--teal);
+    }
+    .subtitle {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 1.75rem;
+      color: #b0b4c1;
+      font-size: 0.98rem;
+      animation: fade-up 0.6s ease-out;
+    }
+
+    .featured-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 1.6rem;
+      overflow: hidden;
+      animation: fade-up 0.7s ease-out;
+    }
+    .featured-bg {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      min-height: 320px;
+      display: flex;
+      align-items: stretch;
+    }
+    .featured-overlay {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.2fr);
+      gap: 1.4rem;
+      width: 100%;
+      padding: 1.6rem 1.9rem;
+      background: linear-gradient(
+        to right,
+        rgba(37, 42, 52, 0.92),
+        rgba(37, 42, 52, 0.6),
+        rgba(37, 42, 52, 0.2)
+      );
+    }
+    .featured-main-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.35rem;
+    }
+    .rating-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(8, 217, 214, 0.12);
+      border: 1px solid rgba(8, 217, 214, 0.7);
+      color: #fdfdfd;
+      margin-bottom: 0.5rem;
+    }
+    .featured-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.8rem;
+      color: #ccd0dd;
+    }
+    .featured-meta span {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.3);
+      background: rgba(37, 42, 52, 0.65);
+    }
+    .featured-blurb {
+      font-size: 0.9rem;
+      color: #f3f4f8;
+      max-width: 480px;
+    }
+
+    .featured-stats {
+      font-size: 0.84rem;
+      color: #d1d5e2;
+      display: grid;
+      gap: 0.5rem;
+      align-content: flex-start;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .stat-label { opacity: 0.8; }
+    .stat-value { font-weight: 600; color: var(--teal); }
+
+    .featured-cta-row {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 0.55rem 1.1rem;
+      border: 1px solid transparent;
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.18s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fdfdfd;
+      box-shadow: 0 10px 24px rgba(255, 46, 99, 0.3);
+      border-color: var(--accent);
+    }
+    .btn-outline {
+      border-color: rgba(234, 234, 234, 0.7);
+      color: #fdfdfd;
+      background: transparent;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.7);
+      background: rgba(37, 42, 52, 0.96);
+      color: #fdfdfd;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.18s, transform 0.15s;
+      z-index: 10; /* make sure arrows are visible */
+    }
+    .carousel-arrow.left { left: 0.8rem; }
+    .carousel-arrow.right { right: 0.8rem; }
+    .carousel-arrow:hover {
+      background: var(--accent);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 0.9rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.35rem;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(234, 234, 234, 0.5);
+      transition: background 0.2s, width 0.2s, transform 0.2s;
+    }
+    .dot.active {
+      width: 18px;
+      background: var(--teal);
+      transform: translateY(-1px);
+    }
+    .featured-wrapper.animating {
+      animation: swap 0.35s ease-in-out;
+    }
+
+    /* LATEST TOP GAMES LIST */
+    .section-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.3rem;
+    }
+    .section-intro {
+      max-width: 650px;
+      color: #b0b4c1;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .top-list {
+      margin-top: 0.8rem;
+      border-top: 1px solid rgba(234, 234, 234, 0.12);
+    }
+    .top-item {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(234, 234, 234, 0.08);
+      transition: background 0.18s, transform 0.12s;
+    }
+    .top-item:hover {
+      background: rgba(37, 42, 52, 0.8);
+      transform: translateY(-1px);
+    }
+    .top-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.25rem;
+    }
+    .rank-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 2px solid var(--teal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--teal);
+    }
+    .top-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .top-score {
+      margin-left: auto;
+      font-size: 0.9rem;
+      color: #f9f293;
+      font-weight: 600;
+    }
+    .top-tags {
+      font-size: 0.8rem;
+      color: #a6aec0;
+      margin-bottom: 0.4rem;
+    }
+    .top-snippet {
+      font-size: 0.86rem;
+      color: #e1e3ec;
+    }
+    .top-meta-right {
+      font-size: 0.8rem;
+      color: #b0b4c1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: flex-end;
+      justify-content: center;
+      text-align: right;
+    }
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.25);
+    }
+
+    /* CTA STRIPES */
+    .cta-strip {
+      margin-top: 2.5rem;
+      background: linear-gradient(90deg, rgba(8, 217, 214, 0.12), transparent);
+      border-top: 1px solid rgba(234, 234, 234, 0.06);
+      border-bottom: 1px solid rgba(234, 234, 234, 0.06);
+    }
+    .cta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      padding: 2.3rem 0 2.4rem;
+    }
+    .cta-block-title {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+    .cta-text {
+      font-size: 0.9rem;
+      color: #c0c4cf;
+      margin-bottom: 0.7rem;
+      max-width: 350px;
+    }
+    .cta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.7rem;
+    }
+    .cta-tag {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 234, 234, 0.25);
+      color: #e0e4f0;
+    }
+
+    footer {
+      padding: 1.4rem 0 2.4rem;
+      font-size: 0.8rem;
+      color: #9094a2;
+      text-align: center;
+    }
+
+    /* ANIMATIONS */
+    @keyframes slide-down {
+      from { transform: translateY(-12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes swap {
+      0% { opacity: 1; transform: translateX(0); }
+      50% { opacity: 0.45; transform: translateX(-14px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 900px) {
+      .featured-overlay {
+        grid-template-columns: 1fr;
+        padding: 1.4rem 1.3rem 1.6rem;
+      }
+      .carousel-arrow.left { left: 0.4rem; }
+      .carousel-arrow.right { right: 0.4rem; }
+      .top-item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+      .top-meta-right {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+    @media (max-width: 700px) {
+      .nav-links { font-size: 0.82rem; gap: 0.4rem; }
+      .hero-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">GAMEREV</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="submit-review.html">Submit a Review!</a>
+        <a href="games.html">Games</a>
+        <a href="about.html">About</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- FEATURED GAMES -->
+  <section class="featured-section">
+    <div class="container">
+      <h1 class="hero-title">
+        The <span class="hero-highlight">live meta</span> of what everyone’s playing.
+      </h1>
+      <p class="subtitle">
+        Community scores, salty takes, and comfort picks—pulled straight from people who are actually queuing every night.
+      </p>
+
+      <div class="featured-wrapper" id="featuredWrapper">
+        <!-- PREVIOUS button -->
+        <button class="carousel-arrow left" id="prevGame">◀</button>
+
+        <div class="featured-bg" id="featuredBg">
+          <div class="featured-overlay">
+            <div>
+              <div class="rating-pill" id="featuredRating">
+                ★ 9.4 · Overwhelmingly Positive
+              </div>
+              <h2 class="featured-main-title" id="featuredTitle">Elden Ring</h2>
+
+              <div class="featured-meta" id="featuredMeta"></div>
+
+              <p class="featured-blurb" id="featuredBlurb">
+                Community notes: brutal, gorgeous, weirdly cozy once it clicks. Expect stories, not just stats.
+              </p>
+
+              <div class="featured-cta-row">
+                <a href="games.html" class="btn btn-primary">Read community reviews</a>
+                <a href="submit-review.html" class="btn btn-outline">Drop your own take</a>
+              </div>
+            </div>
+
+            <div class="featured-stats">
+              <div class="stat-row">
+                <span class="stat-label">Platforms</span>
+                <span class="stat-value" id="featuredPlatforms">PC · PS5 · Xbox</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">Top Tags</span>
+                <span class="stat-value" id="featuredTagsText">Soulslike · Open World</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">Community Score</span>
+                <span class="stat-value" id="featuredScore">9.4 / 10</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">Review Count</span>
+                <span class="stat-value" id="featuredCount">12,384 reviews</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <!-- NEXT button -->
+        <button class="carousel-arrow right" id="nextGame">▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST TOP GAMES -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Latest Top Games</h2>
+      <p class="section-intro">
+        These are the titles taking over friends lists and group chats right now—pulled from the most active threads on GameRev.
+      </p>
+
+      <div class="top-list">
+        <div class="top-item">
+          <div>
+            <div class="top-title-row">
+              <span class="rank-badge">1</span>
+              <span class="top-title">Elden Ring</span>
+              <span class="top-score">★ 9.4</span>
+            </div>
+            <div class="top-tags">Soulslike · Open World · PC · PS5 · Xbox</div>
+            <p class="top-snippet">
+              “Thought I’d bounce off the difficulty. Now I’m sending screenshots of every weird little cave to my friends.”
+            </p>
+          </div>
+          <div class="top-meta-right">
+            <span>2,100+ recent reviews</span>
+            <span>Most tagged as “brutal but fair”</span>
+            <a class="link-pill" href="games.html#elden-ring">Open game page →</a>
+          </div>
+        </div>
+
+        <div class="top-item">
+          <div>
+            <div class="top-title-row">
+              <span class="rank-badge">2</span>
+              <span class="top-title">Valorant</span>
+              <span class="top-score">★ 8.7</span>
+            </div>
+            <div class="top-tags">Tactical Shooter · Ranked · PC</div>
+            <p class="top-snippet">
+              “Team comms decide if you’re having the best night or uninstalling. Somehow both are still fun.”
+            </p>
+          </div>
+          <div class="top-meta-right">
+            <span>5,000+ ranked takes</span>
+            <span>‘One more’ queue champion</span>
+            <a class="link-pill" href="games.html#valorant">Open game page →</a>
+          </div>
+        </div>
+
+        <div class="top-item">
+          <div>
+            <div class="top-title-row">
+              <span class="rank-badge">3</span>
+              <span class="top-title">Stardew Valley</span>
+              <span class="top-score">★ 9.6</span>
+            </div>
+            <div class="top-tags">Cozy · Farming Sim · PC · Console · Mobile</div>
+            <p class="top-snippet">
+              “Came to chill. Accidentally min-maxed my farm and formed strong opinions on which villager deserves the best gifts.”
+            </p>
+          </div>
+          <div class="top-meta-right">
+            <span>3,400+ cozy essays</span>
+            <span>Perfect ‘brain-off’ weeknight pick</span>
+            <a class="link-pill" href="games.html#stardew">Open game page →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="cta-strip">
+    <div class="container">
+      <div class="cta-grid">
+        <div>
+          <h3 class="cta-block-title">Submit a Review</h3>
+          <p class="cta-text">
+            Score it, tag it, and leave the one paragraph that future you will instantly understand when someone asks “worth it ba?”.
+          </p>
+          <div class="cta-tags">
+            <span class="cta-tag">Score + short blurbs</span>
+            <span class="cta-tag">Spoiler flags</span>
+            <span class="cta-tag">Patch-aware takes</span>
+          </div>
+          <a href="submit-review.html" class="btn btn-primary">Start a review</a>
+        </div>
+
+        <div>
+          <h3 class="cta-block-title">Browse Games</h3>
+          <p class="cta-text">
+            Filter by category and mood to find games that match how you actually like to play—not just what’s trending on banners.
+          </p>
+          <div class="cta-tags">
+            <span class="cta-tag">MOBA · FPS · MMORPG</span>
+            <span class="cta-tag">Cozy queue</span>
+            <span class="cta-tag">Try-hard ranked</span>
+          </div>
+          <a href="games.html" class="btn btn-primary">Go to Games</a>
+        </div>
+
+        <div>
+          <h3 class="cta-block-title">Learn the Story</h3>
+          <p class="cta-text">
+            See how GameRev turned into a long-running group chat where people document metas, seasons, and legendary chokes.
+          </p>
+          <div class="cta-tags">
+            <span class="cta-tag">Community history</span>
+            <span class="cta-tag">House rules</span>
+            <span class="cta-tag">Contributor culture</span>
+          </div>
+          <a href="about.html" class="btn btn-outline">About GameRev</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    © 2050 GameRev. Community scores, community memories. Demo layout only.
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var games = [
+      {
+        title: "Elden Ring",
+        ratingLabel: "★ 9.4 · Overwhelmingly Positive",
+        platforms: "PC · PS5 · Xbox",
+        tagsText: "Soulslike · Open World",
+        score: "9.4 / 10",
+        count: "12,384 reviews",
+        meta: ["Action RPG", "Open World", "Single-player"],
+        blurb: "The stories people tell about this game last longer than any patch notes. Brutal, beautiful, and endlessly quotable.",
+        image: "elden-ring-bg.jpg"
+      },
+      {
+        title: "Valorant",
+        ratingLabel: "★ 8.7 · Competitive Favorite",
+        platforms: "PC",
+        tagsText: "Tactical Shooter · 5v5",
+        score: "8.7 / 10",
+        count: "21,509 reviews",
+        meta: ["Tactical FPS", "Ranked", "Team-based"],
+        blurb: "Tight aim, louder comms, and more clutch stories than any group chat can handle.",
+        image: "valorant-bg.jpg"
+      },
+      {
+        title: "Stardew Valley",
+        ratingLabel: "★ 9.6 · Comfort Classic",
+        platforms: "PC · Switch · PS · Xbox · Mobile",
+        tagsText: "Farming Sim · Cozy",
+        score: "9.6 / 10",
+        count: "18,032 reviews",
+        meta: ["Co-op optional", "Relaxed", "Endless replay"],
+        blurb: "Half life sim, half comfort blanket. People ‘take a break’ here for hundreds of hours at a time.",
+        image: "stardew-bg.jpg"
+      }
+    ];
+
+    var currentIndex = 0;
+
+    var wrapper = document.getElementById("featuredWrapper");
+    var bgEl = document.getElementById("featuredBg");
+    var titleEl = document.getElementById("featuredTitle");
+    var ratingEl = document.getElementById("featuredRating");
+    var platformsEl = document.getElementById("featuredPlatforms");
+    var tagsTextEl = document.getElementById("featuredTagsText");
+    var scoreEl = document.getElementById("featuredScore");
+    var countEl = document.getElementById("featuredCount");
+    var metaEl = document.getElementById("featuredMeta");
+    var blurbEl = document.getElementById("featuredBlurb");
+    var dotsContainer = document.getElementById("carouselDots");
+
+    function createDots() {
+      dotsContainer.innerHTML = "";
+      games.forEach(function (_, idx) {
+        var dot = document.createElement("div");
+        dot.className = "dot" + (idx === currentIndex ? " active" : "");
+        dot.dataset.index = idx;
+        dot.addEventListener("click", function () {
+          goToIndex(idx);
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function renderGame(index) {
+      var g = games[index];
+      bgEl.style.backgroundImage = "url('" + g.image + "')";
+      titleEl.textContent = g.title;
+      ratingEl.textContent = g.ratingLabel;
+      platformsEl.textContent = g.platforms;
+      tagsTextEl.textContent = g.tagsText;
+      scoreEl.textContent = g.score;
+      countEl.textContent = g.count;
+      blurbEl.textContent = g.blurb;
+
+      metaEl.innerHTML = "";
+      g.meta.forEach(function (m) {
+        var span = document.createElement("span");
+        span.textContent = m;
+        metaEl.appendChild(span);
+      });
+
+      Array.prototype.forEach.call(dotsContainer.children, function (dot, i) {
+        dot.classList.toggle("active", i === index);
+      });
+    }
+
+    function goToIndex(newIndex) {
+      if (newIndex === currentIndex) return;
+      wrapper.classList.add("animating");
+      setTimeout(function () {
+        currentIndex = (newIndex + games.length) % games.length; // wraps around
+        renderGame(currentIndex);
+      }, 120);
+      setTimeout(function () {
+        wrapper.classList.remove("animating");
+      }, 350);
+    }
+
+    document.getElementById("prevGame").addEventListener("click", function () {
+      goToIndex(currentIndex - 1);
+    });
+    document.getElementById("nextGame").addEventListener("click", function () {
+      goToIndex(currentIndex + 1);
+    });
+
+    createDots();
+    renderGame(currentIndex);
+  })();
+</script>
+</body>
+</html>
