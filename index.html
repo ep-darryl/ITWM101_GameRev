@@ -75,7 +75,6 @@
 
     h1, h2 { font-weight: 700; }
 
-    /* FEATURED HERO / CAROUSEL */
     .featured-section {
       display: flex;
       flex-direction: column;
@@ -345,7 +344,6 @@
       border: 1px solid rgba(234, 234, 234, 0.25);
     }
 
-    /* CTA STRIPES */
     .cta-strip {
       margin-top: 2.5rem;
       background: linear-gradient(90deg, rgba(8, 217, 214, 0.12), transparent);
@@ -442,7 +440,6 @@
 </header>
 
 <main>
-  <!-- FEATURED GAMES -->
   <section class="featured-section">
     <div class="container">
       <h1 class="hero-title">
@@ -453,7 +450,6 @@
       </p>
 
       <div class="featured-wrapper" id="featuredWrapper">
-        <!-- PREVIOUS button -->
         <button class="carousel-arrow left" id="prevGame">◀</button>
 
         <div class="featured-bg" id="featuredBg">
@@ -623,7 +619,7 @@
 
 <footer>
   <div class="container">
-    © 2050 GameRev. Community scores, community memories. Demo layout only.
+    © 2050 GameRev. Community scores, community memories.
   </div>
 </footer>
 
@@ -719,7 +715,7 @@
       if (newIndex === currentIndex) return;
       wrapper.classList.add("animating");
       setTimeout(function () {
-        currentIndex = (newIndex + games.length) % games.length; // wraps around
+        currentIndex = (newIndex + games.length) % games.length; 
         renderGame(currentIndex);
       }, 120);
       setTimeout(function () {
