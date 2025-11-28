@@ -25,7 +25,7 @@
     }
     a { color: inherit; text-decoration: none; }
 
-    /* NAV */
+
     header {
       position: sticky;
       top: 0;
@@ -228,7 +228,7 @@
       justify-content: center;
       font-size: 1rem;
       transition: background 0.18s, transform 0.15s;
-      z-index: 10; /* make sure arrows are visible */
+      z-index: 10; 
     }
     .carousel-arrow.left { left: 0.8rem; }
     .carousel-arrow.right { right: 0.8rem; }
@@ -261,7 +261,6 @@
       animation: swap 0.35s ease-in-out;
     }
 
-    /* LATEST TOP GAMES LIST */
     .section-title {
       font-size: 1.35rem;
       margin-bottom: 0.3rem;
@@ -344,6 +343,7 @@
       border: 1px solid rgba(234, 234, 234, 0.25);
     }
 
+   
     .cta-strip {
       margin-top: 2.5rem;
       background: linear-gradient(90deg, rgba(8, 217, 214, 0.12), transparent);
@@ -440,16 +440,18 @@
 </header>
 
 <main>
+
   <section class="featured-section">
     <div class="container">
       <h1 class="hero-title">
         The <span class="hero-highlight">live meta</span> of what everyone’s playing.
       </h1>
       <p class="subtitle">
-        Community scores, salty takes, and comfort picks—pulled straight from people who are actually queuing every night.
+        Community scores, salty takes, and comfort picks pulled straight from people who are actually queuing every night.
       </p>
 
       <div class="featured-wrapper" id="featuredWrapper">
+      
         <button class="carousel-arrow left" id="prevGame">◀</button>
 
         <div class="featured-bg" id="featuredBg">
@@ -495,13 +497,11 @@
           <div class="carousel-dots" id="carouselDots"></div>
         </div>
 
-        <!-- NEXT button -->
         <button class="carousel-arrow right" id="nextGame">▶</button>
       </div>
     </div>
   </section>
 
-  <!-- LATEST TOP GAMES -->
   <section>
     <div class="container">
       <h2 class="section-title">Latest Top Games</h2>
@@ -715,7 +715,7 @@
       if (newIndex === currentIndex) return;
       wrapper.classList.add("animating");
       setTimeout(function () {
-        currentIndex = (newIndex + games.length) % games.length; 
+        currentIndex = (newIndex + games.length) % games.length;
         renderGame(currentIndex);
       }, 120);
       setTimeout(function () {
